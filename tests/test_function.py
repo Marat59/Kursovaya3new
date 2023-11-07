@@ -5,10 +5,13 @@ import pytest
 from utils import read_file, sort_5_operatons, masked_number, change_date
 
 PATH = os.path.dirname(os.path.abspath(__file__))
+
+@pytest.fixture
 def test_read_file():
     data = read_file(os.path.join(PATH,'test_operations.json'))
     assert isinstance(data, list)
 
+@pytest.fixture
 def test_sort_5_operatons():
   data = [
     {
@@ -92,6 +95,7 @@ def test_sort_5_operatons():
                                      'description': 'Открытие вклада', 'to': 'Счет 41421565395219882431'}]
 
 
+@pytest.fixture
 def test_musk_number():
     assert masked_number("Maestro 1596837868705199") == "Maestro 1596 83** ****5199"
     assert masked_number("Счет 64686473678894779589") == "Счет **9589"
@@ -101,5 +105,6 @@ def test_musk_number():
     #with pytest.raises(AttributeError):
         #masked_number(1)
 
+@pytest.fixture
 def test_change_date():
     assert change_date('2019-08-26T10:50:58.294041') == '26.08.2019'
